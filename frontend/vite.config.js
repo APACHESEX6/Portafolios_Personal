@@ -33,6 +33,7 @@ export default defineConfig({
   
   // Optimizaciones de desarrollo
   server: {
+    open: true, // Abrir navegador automáticamente
     hmr: {
       overlay: false, // Menos overhead
     },

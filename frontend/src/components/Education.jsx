@@ -5,11 +5,11 @@ import './Education.css';
 const Education = () => {
   const { data: education, loading } = useFetch(educationService.getAll);
 
-  if (loading) return <div className="loading" style={{ minHeight: '800px' }}>Cargando...</div>;
+  if (loading) return <div className="loading">Cargando...</div>;
   if (!education || education.length === 0) return null;
 
   return (
-    <section id="educacion" className="section alternate" style={{ minHeight: '800px' }}>
+    <section id="educacion" className="section alternate">
       <div className="container">
         <h2 className="section-title">Educación</h2>
         <div className="education-timeline">

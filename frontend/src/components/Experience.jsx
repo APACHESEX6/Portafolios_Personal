@@ -9,7 +9,7 @@ const Experience = () => {
   if (!experience || experience.length === 0) return null;
 
   return (
-    <section id="experiencia" className="section alternate" style={{ minHeight: '800px' }}>
+    <section id="experiencia" className="section alternate">
       <div className="container">
         <h2 className="section-title">Experiencia</h2>
         <div className="experience-timeline">

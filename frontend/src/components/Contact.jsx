@@ -41,7 +41,7 @@ const Contact = () => {
   if (!profile) return null;
 
   return (
-    <section id="contacto" className="section" style={{ minHeight: '600px' }}>
+    <section id="contacto" className="section">
       <div className="container">
         <h2 className="section-title">Contacto</h2>
         <div className="contact-content">

@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './config/database.js';
+import { testConnection as testSupabase } from './config/supabaseClient.js';
 
 // Importar rutas
 import profileRoutes from './routes/profileRoutes.js';
@@ -58,8 +59,20 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`🚀 Servidor ejecutándose en http://localhost:${PORT}`);
+
+  // Verificar conexión a Supabase (comprobación ligera)
+  try {
+    const ok = await testSupabase();
+    if (ok) {
+      console.log('✅ Supabase reachable (basic check passed)');
+    } else {
+      console.log('⚠️  Supabase no responde al check básico. Revisa SUPABASE_URL y SUPABASE_KEY en .env');
+    }
+  } catch (err) {
+    console.log('⚠️  Error al verificar Supabase:', err.message || err);
+  }
 });
 
 export default app;

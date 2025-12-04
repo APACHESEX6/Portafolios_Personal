@@ -29,7 +29,7 @@ const About = () => {
 
   return (
     <>
-      <section id="sobre-mi" className="section" style={{ minHeight: '600px' }}>
+      <section id="sobre-mi" className="section">
         <div className="container">
           <h2 className="section-title">Sobre Mí</h2>
           <div className="about-content">
@@ -62,7 +62,7 @@ const About = () => {
         </div>
       </section>
 
-      <section id="informacion-personal" className="section alternate" style={{ minHeight: '800px' }}>
+      <section id="informacion-personal" className="section alternate">
         <div className="container">
           <h2 className="section-title">Información Personal</h2>
           <div className="personal-info-grid">

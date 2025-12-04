@@ -42,7 +42,7 @@ const Skills = () => {
   };
 
   return (
-    <section id="habilidades" className="section alternate" style={{ minHeight: '700px' }}>
+    <section id="habilidades" className="section alternate">
       <div className="container">
         <h2 className="section-title">Habilidades Técnicas</h2>
         <div className="skills-container">
