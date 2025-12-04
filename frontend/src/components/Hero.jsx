@@ -4,7 +4,7 @@ import { Download, Mail, ArrowDown, Sparkles } from 'lucide-react';
 import './Hero.css';
 
 const Hero = () => {
-  const { data: profile, loading } = useFetch(profileService.getProfile);
+  const { data: profile } = useFetch(profileService.getProfile);
 
   // Siempre mantener la misma estructura para evitar saltos
   const displayData = profile || {
@@ -30,7 +30,7 @@ const Hero = () => {
             <span>Disponible para proyectos</span>
           </div>
           <h1 className="gradient-text" style={{ minHeight: '70px' }}>
-            {loading ? 'Cargando...' : `${displayData.nombre} ${displayData.apellidos}`}
+            {`${displayData.nombre} ${displayData.apellidos}`}
           </h1>
           <h2 style={{ minHeight: '40px' }}>{displayData.profesion}</h2>
           <p style={{ minHeight: '100px' }}>{displayData.descripcionCorta}</p>

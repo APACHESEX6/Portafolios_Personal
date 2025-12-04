@@ -1,17 +1,23 @@
 import { useFetch } from '../hooks/useFetch';
 import { skillService } from '../services/apiService';
 import { Code2, Database, Wrench, Sparkles } from 'lucide-react';
+import {
+  SiHtml5,
+  SiCss3,
+  SiJavascript,
+  SiReact,
+  SiAngular,
+  SiPython,
+  SiNodedotjs,
+  SiExpress,
+  SiPostgresql,
+  SiMongodb,
+  SiMysql
+} from 'react-icons/si';
 import './Skills.css';
 
 const Skills = () => {
-  const { data: skills, loading } = useFetch(skillService.getAll);
-
-  if (loading) return (
-    <div className="loading">
-      <div className="spinner"></div>
-      <p>Cargando...</p>
-    </div>
-  );
+  const { data: skills } = useFetch(skillService.getAll);
   
   if (!skills || skills.length === 0) return null;
 
@@ -60,7 +66,29 @@ const Skills = () => {
                       <div className="skill-header">
                         <div className="skill-name">
                           <div className="skill-icon" style={{ color: skill.color }}>
-                            <i className={skill.icono}></i>
+                            {
+                              // Mapear por nombre de la skill a un icono React
+                              (() => {
+                                const map = {
+                                  'HTML5': SiHtml5,
+                                  'CSS3': SiCss3,
+                                  'JavaScript': SiJavascript,
+                                  'React': SiReact,
+                                  'Angular': SiAngular,
+                                  'Python': SiPython,
+                                  'Node.js': SiNodedotjs,
+                                  'Node': SiNodedotjs,
+                                  'Express': SiExpress,
+                                  'PostgreSQL': SiPostgresql,
+                                  'MongoDB': SiMongodb,
+                                  'MySQL': SiMysql
+                                };
+                                const Icon = map[skill.nombre] || null;
+                                if (Icon) return <Icon size={20} />;
+                                // fallback: inicial
+                                return <span className="skill-fallback" aria-hidden="true">{skill.nombre.charAt(0)}</span>;
+                              })()
+                            }
                           </div>
                           <span>{skill.nombre}</span>
                         </div>

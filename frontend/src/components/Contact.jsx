@@ -4,7 +4,7 @@ import { profileService, contactService } from '../services/apiService';
 import './Contact.css';
 
 const Contact = () => {
-  const { data: profile, loading } = useFetch(profileService.getProfile);
+  const { data: profile } = useFetch(profileService.getProfile);
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -37,7 +37,6 @@ const Contact = () => {
     }
   };
 
-  if (loading) return <div className="loading">Cargando...</div>;
   if (!profile) return null;
 
   return (

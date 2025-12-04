@@ -1,6 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import path from 'path';
+import fs from 'fs';
 import connectDB from './config/database.js';
 import { testConnection as testSupabase } from './config/supabaseClient.js';
 
@@ -23,6 +25,22 @@ connectDB();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Servir frontend estático si existe el build
+const frontendDist = path.join(process.cwd(), 'frontend', 'dist');
+const backendPublic = path.join(process.cwd(), 'public');
+
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get(/^\/(?!api).*/, (req, res) => {
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+} else if (fs.existsSync(backendPublic)) {
+  app.use(express.static(backendPublic));
+  app.get(/^\/(?!api).*/, (req, res) => {
+    res.sendFile(path.join(backendPublic, 'index.html'));
+  });
+}
 
 // Rutas
 app.get('/', (req, res) => {

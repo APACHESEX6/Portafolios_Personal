@@ -3,9 +3,7 @@ import { experienceService } from '../services/apiService';
 import './Experience.css';
 
 const Experience = () => {
-  const { data: experience, loading } = useFetch(experienceService.getAll);
-
-  if (loading) return <div className="loading">Cargando...</div>;
+  const { data: experience } = useFetch(experienceService.getAll);
   if (!experience || experience.length === 0) return null;
 
   return (

@@ -3,6 +3,7 @@ import Profile from './models/Profile.js';
 import Education from './models/Education.js';
 import Experience from './models/Experience.js';
 import Skill from './models/Skill.js';
+import ContactMessage from './models/ContactMessage.js';
 
 const seedDatabase = async () => {
   try {
@@ -145,6 +146,32 @@ const seedDatabase = async () => {
         defaults: skill
       });
       console.log(created ? `✅ Habilidad creada: ${skill.nombre}` : `✓ Habilidad ya existe: ${skill.nombre}`);
+    }
+
+    // Insertar Mensajes de Contacto (ejemplos)
+    const contactMessages = [
+      {
+        nombre: 'María Gómez',
+        email: 'maria.gomez@example.com',
+        asunto: 'Interés en colaboración',
+        mensaje: 'Hola Diego, me interesa colaborar en un proyecto. ¿Podríamos hablar?',
+        leido: false
+      },
+      {
+        nombre: 'Juan Pérez',
+        email: 'juan.perez@example.com',
+        asunto: 'Consulta sobre CV',
+        mensaje: 'Buen día, ¿podrías enviarme una copia actualizada de tu CV?',
+        leido: false
+      }
+    ];
+
+    for (const msg of contactMessages) {
+      const [messageRecord, created] = await ContactMessage.findOrCreate({
+        where: { email: msg.email, asunto: msg.asunto },
+        defaults: msg
+      });
+      console.log(created ? `✅ Mensaje creado: ${msg.asunto} (${msg.email})` : `✓ Mensaje ya existe: ${msg.asunto} (${msg.email})`);
     }
 
     console.log('\n🎉 Base de datos poblada exitosamente!');

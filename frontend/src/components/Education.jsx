@@ -3,9 +3,7 @@ import { educationService } from '../services/apiService';
 import './Education.css';
 
 const Education = () => {
-  const { data: education, loading } = useFetch(educationService.getAll);
-
-  if (loading) return <div className="loading">Cargando...</div>;
+  const { data: education } = useFetch(educationService.getAll);
   if (!education || education.length === 0) return null;
 
   return (

@@ -5,14 +5,7 @@ import { User, FileText, CreditCard, Fingerprint, Cake, Calendar, Droplet, Flag,
 import './About.css';
 
 const About = () => {
-  const { data: profile, loading } = useFetch(profileService.getProfile);
-
-  if (loading) return (
-    <div className="loading">
-      <div className="spinner"></div>
-      <p>Cargando...</p>
-    </div>
-  );
+  const { data: profile } = useFetch(profileService.getProfile);
   
   if (!profile) return null;
 
@@ -46,7 +39,11 @@ const About = () => {
                 {profile.idiomas.map((idioma, index) => (
                   <div key={index} className="language-card">
                     <div className="language-icon">
-                      <i className={idioma.icono}></i>
+                      {idioma.icono ? (
+                        <i className={idioma.icono} aria-hidden="true"></i>
+                      ) : (
+                        <span className="skill-fallback" aria-hidden="true">{idioma.nombre.charAt(0)}</span>
+                      )}
                     </div>
                     <div className="language-details">
                       <span className="language-name">{idioma.nombre}</span>
